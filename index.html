@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caesha Rachma | Web Developer & Data Specialist</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root{
+            --bg: #ffffff;
+            --text: #0f172a;
+            --muted: #64748b;
+            --card: rgba(255,255,255,0.4);
+            --accent: #ec4899;
+        }
+
+        [data-theme="dark"]{
+            --bg: #0b1020;
+            --text: #e6eef8;
+            --muted: #9aa9bf;
+            --card: rgba(12,17,28,0.6);
+            --accent: #fb7185;
+        }
+
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); color: var(--text); }
+        h1, h2, .font-syne { font-family: 'Syne', sans-serif; }
+        
+        .bg-mesh {
+            background-color: var(--bg);
+            background-image: radial-gradient(at 0% 0%, hsla(328,100%,95%,1) 0, transparent 50%), 
+                              radial-gradient(at 50% 0%, hsla(272,100%,95%,1) 0, transparent 50%), 
+                              radial-gradient(at 100% 0%, hsla(202,100%,95%,1) 0, transparent 50%);
+        }
+
+        .glass-card {
+            background: var(--card);
+            backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 2.5rem;
+        }
+
+        .neo-button {
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 20px -10px rgba(236, 72, 153, 0.5);
+        }
+
+        .neo-button:hover {
+            transform: scale(1.05) translateY(-5px);
+            box-shadow: 0 20px 30px -10px rgba(236, 72, 153, 0.6);
+        }
+
+        .text-glow {
+            text-shadow: 0 0 20px rgba(236, 72, 153, 0.3);
+        }
+
+        /* Ripple effect */
+        .ripple{position:relative;overflow:hidden}
+        .ripple:after{content:"";position:absolute;border-radius:50%;transform:scale(0);background:rgba(255,255,255,0.3);width:100px;height:100px;opacity:0;pointer-events:none;transition:transform .6s,opacity .8s}
+
+        /* Preloader */
+        #preloader{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:60}
+        #preloader .spinner{width:72px;height:72px;border:8px solid rgba(0,0,0,0.06);border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite}
+        @keyframes spin{to{transform:rotate(360deg)}}
+
+        /* Typing fade */
+        .word-fade{display:inline-block;transition:opacity .4s}
+    </style>
+</head>
+<body class="bg-mesh text-slate-900 overflow-x-hidden">
+
+    <!-- Floating Navbar -->
+    <nav class="fixed w-full z-50 top-6 px-6">
+        <div class="max-w-5xl mx-auto glass-card px-8 py-4 flex justify-between items-center shadow-xl">
+            <span class="font-syne text-2xl tracking-tighter bg-gradient-to-r from-pink-500 to-violet-600 bg-clip-text text-transparent">CAESHA.DEV</span>
+            <div class="hidden md:flex gap-6 items-center text-xs font-bold uppercase tracking-widest">
+                <a href="#about" class="hover:text-pink-500 transition">About</a>
+                <a href="#skills" class="hover:text-pink-500 transition">Skills</a>
+                <a href="#work" class="hover:text-pink-500 transition">Work</a>
+                <a href="#contact" class="px-5 py-2 bg-gray-900 text-white rounded-full hover:bg-pink-500 transition">Contact</a>
+                <!-- Dark mode toggle -->
+                <button id="theme-toggle" aria-label="Toggle theme" class="ml-2 p-2 rounded-full bg-white/30 hover:bg-white/40 transition">
+                    <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amber-400" viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a.75.75 0 01.75.75V4a.75.75 0 01-1.5 0V2.75A.75.75 0 0110 2zM10 16a.75.75 0 01.75.75V18a.75.75 0 01-1.5 0v-1.25A.75.75 0 0110 16zM4 10a.75.75 0 01.75.75H6a.75.75 0 010-1.5H4.75A.75.75 0 014 10zM14 10a.75.75 0 01.75.75H16a.75.75 0 010-1.5h-1.25A.75.75 0 0114 10zM5.22 5.22a.75.75 0 011.06 0l.88.88a.75.75 0 11-1.06 1.06l-.88-.88a.75.75 0 010-1.06zM13.84 13.84a.75.75 0 011.06 0l.88.88a.75.75 0 11-1.06 1.06l-.88-.88a.75.75 0 010-1.06zM5.22 14.78a.75.75 0 010 1.06l-.88.88a.75.75 0 11-1.06-1.06l.88-.88a.75.75 0 011.06 0zM14.78 5.22a.75.75 0 010 1.06l-.88.88a.75.75 0 11-1.06-1.06l.88-.88a.75.75 0 011.06 0z"/></svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section: Gen Z Vibe -->
+    <section class="min-h-screen flex items-center justify-center pt-24 px-6">
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+            <div class="relative z-10">
+                <div class="inline-flex items-center gap-2 bg-white/50 px-4 py-2 rounded-full border border-pink-100 mb-8">
+                    <span class="w-2 h-2 bg-pink-500 rounded-full animate-ping"></span>
+                    <span class="text-[10px] font-bold uppercase tracking-widest text-pink-600">Available for Slay Projects</span>
+                </div>
+                <h1 class="text-6xl md:text-8xl font-syne mb-8 leading-none tracking-tight">
+                    Building <span id="dynamic-word" class="text-pink-500 italic word-fade">Smart</span> <br>
+                    & Aesthetic <br>
+                    <span class="bg-gradient-to-r from-violet-600 to-pink-500 bg-clip-text text-transparent underline decoration-pink-200">Systems.</span>
+                </h1>
+                <p class="text-lg text-slate-500 max-w-md mb-10 leading-relaxed">
+                    Independent <strong>Web Developer</strong> graduate from UNTAR. Expert in crafting visually stunning Front-End & robust Back-End solutions, backed by <strong>QA & Data Analysis</strong> precision.
+                </p>
+                <div class="flex gap-4">
+                    <button id="explore-btn" class="ripple neo-button bg-gray-900 text-white px-10 py-5 rounded-3xl font-bold">Explore My Work</button>
+                    <button id="resume-btn" class="ripple neo-button bg-white text-gray-900 border border-gray-100 px-10 py-5 rounded-3xl font-bold">My Resume</button>
+                </div>
+            </div>
+            <div class="relative">
+                <div class="absolute -inset-10 bg-gradient-to-tr from-pink-200 to-violet-200 rounded-full blur-3xl opacity-40 animate-pulse"></div>
+                <div class="relative glass-card p-4 overflow-hidden rotate-3 hover:rotate-0 transition duration-700">
+                    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=800&auto=format&fit=crop" class="rounded-[2rem] w-full h-[500px] object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Expertise: The Triple Threat -->
+    <section id="skills" class="py-24 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Web Dev -->
+                <div class="glass-card p-10 hover:border-pink-300 transition duration-500 group">
+                    <div class="w-14 h-14 bg-pink-500 rounded-2xl mb-8 flex items-center justify-center text-white text-2xl shadow-lg shadow-pink-200">👩‍💻</div>
+                    <h3 class="text-2xl font-syne mb-4">Web Developer</h3>
+                    <p class="text-sm text-slate-500 mb-6 font-medium">Expertise in **HTML, CSS, JS** for pixel-perfect UI & **PHP/phpMyAdmin** for database management.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-[10px] bg-white px-3 py-1 rounded-full font-bold border border-pink-100">LARAVEL</span>
+                        <span class="text-[10px] bg-white px-3 py-1 rounded-full font-bold border border-pink-100">MYSQL</span>
+                    </div>
+                </div>
+
+                <!-- QA -->
+                <div class="glass-card p-10 hover:border-violet-300 transition duration-500 group">
+                    <div class="w-14 h-14 bg-violet-500 rounded-2xl mb-8 flex items-center justify-center text-white text-2xl shadow-lg shadow-violet-200">🔍</div>
+                    <h3 class="text-2xl font-syne mb-4">QA Specialist</h3>
+                    <p class="text-sm text-slate-500 mb-6 font-medium">Ensuring every system is bug-free through manual & automated testing (**Selenium/Postman**).</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-[10px] bg-white px-3 py-1 rounded-full font-bold border border-violet-100">TEST CASE</span>
+                        <span class="text-[10px] bg-white px-3 py-1 rounded-full font-bold border border-violet-100">UAT</span>
+                    </div>
+                </div>
+
+                <!-- Data Analyst -->
+                <div class="glass-card p-10 hover:border-blue-300 transition duration-500 group">
+                    <div class="w-14 h-14 bg-blue-500 rounded-2xl mb-8 flex items-center justify-center text-white text-2xl shadow-lg shadow-blue-200">📊</div>
+                    <h3 class="text-2xl font-syne mb-4">Data Analyst</h3>
+                    <p class="text-sm text-slate-500 mb-6 font-medium">Turning data into insights using **Python** & **Power BI** for data-driven decisions.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-[10px] bg-white px-3 py-1 rounded-full font-bold border border-blue-100">SPSS</span>
+                        <span class="text-[10px] bg-white px-3 py-1 rounded-full font-bold border border-blue-100">ETL</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work Experience (Professional Slay) -->
+    <section id="work" class="py-24 px-6 bg-white rounded-[4rem] shadow-sm">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-syne text-center mb-20">The <span class="italic text-pink-500 underline decoration-pink-100">Experience</span></h2>
+            
+            <div class="space-y-12">
+                <!-- Exp 1 -->
+                <div class="flex flex-col md:flex-row justify-between items-start gap-6 border-b border-slate-100 pb-12">
+                    <div>
+                        <h4 class="text-xs font-bold text-pink-500 uppercase tracking-widest mb-2">QA Intern • PT Adi Data Informatika</h4>
+                        <h3 class="text-3xl font-syne">Software Quality Assurance</h3>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-sm text-slate-400 italic">Jan 2026 - Mar 2026</p>
+                    </div>
+                </div>
+
+                <!-- Exp 2 -->
+                <div class="flex flex-col md:flex-row justify-between items-start gap-6 border-b border-slate-100 pb-12">
+                    <div>
+                        <h4 class="text-xs font-bold text-violet-500 uppercase tracking-widest mb-2">Data & Research Intern • PT Telin Indonesia</h4>
+                        <h3 class="text-3xl font-syne">Quantitative Research & Power BI</h3>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-sm text-slate-400 italic">Aug 2025 - Dec 2025</p>
+                    </div>
+                </div>
+
+                <!-- Project -->
+                <div class="flex flex-col md:flex-row justify-between items-start gap-6 border-b border-slate-100 pb-12">
+                    <div>
+                        <h4 class="text-xs font-bold text-blue-500 uppercase tracking-widest mb-2">Web Developer Project • Full Stack</h4>
+                        <h3 class="text-3xl font-syne">Luby's Salon Services Website</h3>
+                    </div>
+                    <div class="text-right text-pink-500 font-bold italic">HTML • CSS • JS • PHP</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final Slay Section -->
+    <section id="contact" class="py-32 px-6 text-center">
+        <div class="max-w-4xl mx-auto glass-card p-12 md:p-24 relative overflow-hidden">
+            <div class="relative z-10">
+                <h2 class="text-5xl md:text-7xl font-syne mb-8 tracking-tighter leading-none">Let's Create <br>Something <span class="text-pink-500 italic">Iconic.</span></h2>
+                <p class="text-slate-500 mb-12 max-w-lg mx-auto font-medium">I'm ready to bring my independent mindset and technical skills to your team. Let's slay your next digital project!</p>
+                <a href="mailto:caesharahmadhani@gmail.com" class="neo-button inline-block bg-gray-900 text-white px-12 py-5 rounded-full font-bold tracking-widest">EMAIL ME ✨</a>
+            </div>
+            <!-- Decorative circle -->
+            <div class="absolute -top-20 -right-20 w-64 h-64 bg-pink-100 rounded-full blur-3xl opacity-50"></div>
+        </div>
+        
+        <div class="mt-20 flex justify-center gap-12 font-bold uppercase text-[10px] tracking-widest text-slate-400">
+            <a href="https://www.linkedin.com/in/caesharachmadhani" class="hover:text-pink-500 transition">LinkedIn</a>
+            <a href="https://github.com/caesharachma" class="hover:text-pink-500 transition">GitHub</a>
+            <a href="https://wa.me/6281296286806" class="hover:text-pink-500 transition">WhatsApp</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 text-center text-[10px] font-bold text-slate-300 uppercase tracking-[0.6em]">
+        © 2026 Caesha Rachma Dhani • Independent • Smart • Slay
+    </footer>
+
+        <script>
+            // Preloader hide
+            window.addEventListener('load', ()=>{
+                const p = document.getElementById('preloader');
+                if(p){p.style.transition='opacity .5s';p.style.opacity=0;setTimeout(()=>p.remove(),600)}
+            });
+
+            // Theme toggle & persistence
+            const toggle = document.getElementById('theme-toggle');
+            const root = document.documentElement;
+            function applyTheme(t){
+                if(t==='dark'){root.setAttribute('data-theme','dark');document.getElementById('theme-icon').innerHTML = '<path d="M10 2a.75.75 0 01.75.75V4a.75.75 0 01-1.5 0V2.75A.75.75 0 0110 2zM10 16a.75.75 0 01.75.75V18a.75.75 0 01-1.5 0v-1.25A.75.75 0 0110 16zM4 10a.75.75 0 01.75.75H6a.75.75 0 010-1.5H4.75A.75.75 0 014 10zM14 10a.75.75 0 01.75.75H16a.75.75 0 010-1.5h-1.25A.75.75 0 0114 10zM5.22 5.22a.75.75 0 011.06 0l.88.88a.75.75 0 11-1.06 1.06l-.88-.88a.75.75 0 010-1.06zM13.84 13.84a.75.75 0 011.06 0l.88.88a.75.75 0 11-1.06 1.06l-.88-.88a.75.75 0 010-1.06zM5.22 14.78a.75.75 0 010 1.06l-.88.88a.75.75 0 11-1.06-1.06l.88-.88a.75.75 0 011.06 0zM14.78 5.22a.75.75 0 010 1.06l-.88.88a.75.75 0 11-1.06-1.06l.88-.88a.75.75 0 011.06 0z"/>';
+                } else {root.removeAttribute('data-theme');document.getElementById('theme-icon').innerHTML = '<path d="M17.293 13.293a8 8 0 11-10.586-10.586 8 8 0 0010.586 10.586z"/>'}
+            }
+            const saved = localStorage.getItem('theme');
+            applyTheme(saved==='dark'?'dark':'light');
+            toggle.addEventListener('click', ()=>{
+                const isDark = root.getAttribute('data-theme')==='dark';
+                applyTheme(isDark?'light':'dark');
+                localStorage.setItem('theme', isDark? 'light' : 'dark');
+            });
+
+            // Dynamic hero words
+            const words = ['Smart','Aesthetic','Fast','Reliable'];
+            const dyn = document.getElementById('dynamic-word');
+            let wi=0;
+            setInterval(()=>{
+                if(!dyn) return;
+                dyn.style.opacity=0;
+                setTimeout(()=>{dyn.textContent=words[wi];dyn.style.opacity=1;wi=(wi+1)%words.length},420);
+            },2200);
+
+            // Ripple effect for buttons
+            document.querySelectorAll('.ripple').forEach(btn=>{
+                btn.addEventListener('click', function(e){
+                    const after = this;
+                    const rect = this.getBoundingClientRect();
+                    const x = e.clientX - rect.left - 50; const y = e.clientY - rect.top - 50;
+                    after.style.setProperty('--ripple-x', x+'px');
+                    after.style.setProperty('--ripple-y', y+'px');
+                    const el = document.createElement('span');
+                    el.style.position='absolute';el.style.left=(x)+'px';el.style.top=(y)+'px';el.style.width='120px';el.style.height='120px';el.style.background='rgba(255,255,255,0.12)';el.style.borderRadius='50%';el.style.transform='scale(0)';el.style.transition='transform .6s,opacity .8s';el.style.pointerEvents='none';this.appendChild(el);
+                    requestAnimationFrame(()=>{el.style.transform='scale(2)';el.style.opacity='0'});
+                    setTimeout(()=>el.remove(),800);
+                })
+            });
+
+            // Simple parallax on hero image when moving mouse
+            const heroImg = document.querySelector('section.min-h-screen img');
+            if(heroImg){
+                const parent = heroImg.closest('.relative');
+                parent.addEventListener('mousemove', (e)=>{
+                    const r = parent.getBoundingClientRect();
+                    const dx = (e.clientX - r.left)/r.width - 0.5;
+                    const dy = (e.clientY - r.top)/r.height - 0.5;
+                    heroImg.style.transform = `translate(${dx*12}px, ${dy*8}px) scale(1.02)`;
+                });
+                parent.addEventListener('mouseleave', ()=>{heroImg.style.transform='translate(0,0) scale(1)'});
+            }
+        </script>
+</body>
+</html>
